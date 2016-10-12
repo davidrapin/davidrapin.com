@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<link rel="stylesheet" href="./reveal/css/reveal.css">
+	<link rel="stylesheet" href="./reveal/css/theme/default.css" id="theme">
+	<!-- If the query includes 'pdf', use the PDF print sheet -->
+	<script>
+		document.write( '<link rel="stylesheet" href="./reveal/css/print/' + ( window.location.search.match( /pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+	</script>
+	<title>Live Archiving Proxy Workshop</title>
+</head>
+
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section>
+	<span style="font-size:18px; position: absolute; display:block; left:0; top:0;">David RAPIN, 2013-04-23</span>
+	<br/><br/>
+	<h1>
+	Live <br/>
+	Archiving<br/>
+	Proxy
+	</h1>
+	<h2>Workshop</h2>
+</section>
+
+<section>
+	<h2>A project from</h2>
+	<img src="./images/logo-ina.png" style="margin:0" />
+	<h2>with</h2>
+	<img src="./images/Netarchive.dk.png" style="margin:0" />
+</section>
+
+<section>
+	<br/>
+	<h2>Workshop schedule</h2>
+	<ol>
+		<li><a href="#/3">Motivations</a></li>
+		<li><a href="#/9">Description</a></li>
+		<li><a href="#/15">Writer plugins</a></li>
+		<li><a href="#/18">Early feedback</a></li>
+		<li><a href="#/23">Discussion</a></li>
+		<li><a href="#/24">Resources</a></li>
+	</ol>
+</section>
+
+<section>
+	<br/><br/><br/>
+	<h1>1) Motivations</h1>
+</section>
+
+<section>
+	<br/><br/>
+	<h3>Motivations (1/4)</h3>
+	<br/>
+	<h2>Websites get more complex</h2>
+	<ul>
+		<li class="fragment grow">Dynamically fetched resources (AJAX, Flash)</li>
+		<li class="fragment grow">Very interactive sites (Facebook, Twitter)</li>
+		<li class="fragment grow">Voluntary and involuntary crawler traps</li>
+	</ul>
+</section>
+
+<section>
+	<br/><br/>
+	<h3>Motivations (2/4)</h3>
+	<br/>
+	<h2>Need for many new <br/>specialized crawlers to ...</h2>
+	<ul>
+		<li class="fragment grow">run JavaScript (PhantomJS, Firefox as a crawler)</li>
+		<li class="fragment grow">harvest specific sites (Facebook, Twitter)</li>
+		<li class="fragment grow">make complementary crawls</li>
+	</ul>
+</section>
+
+<section>
+	<br/><br/>
+	<h3>Motivations (3/4)</h3>
+	<br/>
+	<h2>Need for easier <br/>crawler development</h2>
+	<ul>
+		<li class="fragment grow">use any HTTP client as a crawler</li>
+		<li class="fragment grow">use full blown browsers as crawlers (Firefox)</li>
+		<li class="fragment grow">use human operated browsers as crawlers</li>
+		<li class="fragment grow"><strong>DO NOT duplicate archive writing code</strong></li>
+	</ul>
+</section>	
+	
+<section>	
+	<br/><br/>
+	<h3>Motivations (4/4)</h3>
+	<h2>Bonus</h2>
+	<ul>
+		<li class="fragment grow">Standard interface (HTTP proxy) for any crawler</li>
+		<li class="fragment grow">Isolation of archive writing</li>
+		<li class="fragment grow">Language/platform agnostic archive writing</li>
+		<li class="fragment grow">"Virtualization" of archive writing</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Easy task.</h2>
+	<img src="./images/indeed.jpg" style="margin:0; width:40%" />
+</section>
+
+<section>
+	<br/><br/><br/>
+	<h1>2) Description</h1>
+</section>
+
+<section>
+	<h3>Description (1/4)</h3>
+	<h2>An HTTP proxy set-up between<br/>your crawler(s) and the Web ...</h2>
+	<img src="./images/lap.png" style="margin:0; width:80%" />
+</section>
+
+<section>
+	<h3>Description (2/4)</h3>
+	<h2>... that takes care of <br/>capturing HTTP responses ...</h2>
+	<img src="./images/lap.png" style="margin:0; width:80%" />
+</section>
+
+<section>
+	<h3>Description (3/4)</h3>
+	<h2>... and delegates archive-writing<br/>
+	to a "writer plugin".</h2>
+	<img src="./images/lap.png" style="margin:0; width:80%" />
+</section>
+
+<section>
+	<h3>Description (4/4)</h3>
+	<p>The LAP's dashboard in action</p>
+	<iframe src="http://player.vimeo.com/video/58103718" width="750" height="500" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+</section>
+
+<section>
+	<h2>Archive all the Websites !</h2>
+	<img src="./images/all-the-things.jpg" style="margin:0;" />
+</section>
+
+<section>
+	<br/><br/><br/>
+	<h1>3) Writer plugins</h1>
+</section>
+
+<section>
+	<h3>Writer plugins (1/2)</h3>
+	<h2>Existing writers</h2>
+	<ul>
+		<li class="fragment grow">WARC (developed by Netarchive.dk)</li>
+		<li class="fragment grow">DAFF (format used at Ina)</li>
+		<li class="fragment grow">Log (URL log only, no data)</li>
+		<li class="fragment grow">ARC (in development ...)</li>
+	</ul>
+</section>
+
+
+<section><!-- scroll down -->
+
+<section>
+	<h3>Writer plugins (2/2)</h3>
+	<h2>Easy development</h2>
+	<ul>
+		<li class="fragment grow">in Java</li>
+		<li class="fragment grow">just extend <code>DefaultLapWriter.java</code></li>
+		<li class="fragment grow"><a href="https://oss.sonatype.org/content/repositories/snapshots/fr/ina/dlweb/lap-writer-generic/">project JARs available on Maven</a></li>
+	</ul>
+	<pre>&lt;repository&gt;
+    &lt;id&gt;sonatype-nexus-snapshots&lt;/id&gt;
+    &lt;url&gt;https://oss.sonatype.org/content/repositories/snapshots&lt;/url&gt;
+&lt;/repository&gt;</pre>
+	<pre>&lt;dependency&gt;
+    &lt;groupId&gt;fr.ina.dlweb&lt;/groupId&gt;
+    &lt;artifactId&gt;lap-writer-generic&lt;/artifactId&gt;
+    &lt;version&gt;2.0-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+</section>	
+	
+<section>
+	<img src="./images/lap_writer_interface.png" style="margin:0" />
+</section>
+
+<section>
+	<img src="./images/lap_metadata_interface.png" style="margin:0" />
+</section>
+
+<section>
+	<img src="./images/lap_metadata_getinfo.png" style="margin:0" />
+</section>
+
+</section><!-- scroll down -->
+
+<section>
+	<br/><br/><br/>
+	<h1>4) Early feedback</h1>
+</section>
+
+<section>
+	<h3>Early feedback (1/4)</h3>
+	<h2>Use cases</h2>
+	<ul>
+		<li class="fragment grow">Dynamically loaded resources extraction</li>
+		<li class="fragment grow">Complementary crawls for Q.A.</li>
+		<li class="fragment grow">Human based crawling</li>
+		<li class="fragment grow">Youtube crawling</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Early feedback (2/4)</h3>
+	<h2>Issues</h2>
+	<ul>
+		<li class="fragment grow">No HTTPS</li>
+		<li class="fragment grow">Dynamic URLs for media contents</li>
+		<li class="fragment grow">JavaScript enabled crawlers ?</li>
+		<li class="fragment grow">No crawlers for streaming media</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Early feedback (3/4)</h3>
+	<h2>Feature requests (LAP)</h2>
+	<ul>
+		<li class="fragment grow">HTTPS</li>
+		<li class="fragment grow">Add client IP to metadata</li>
+		<li class="fragment grow">Add server IP to metadata</li>
+		<li class="fragment grow">Option to discard content<br/>when no writer is online</li>
+		<li class="fragment grow">Expose writer Web interfaces</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Early feedback (4/4)</h3>
+	<h2>Feature requests (Writer)</h2>
+	<ul>
+		<li class="fragment grow">ARC writer</li>
+		<li class="fragment grow">Collect to different WARC files concurrently</li>
+		<ul>
+			<li class="fragment grow">per crawler</li>
+			<li class="fragment grow">per collection</li>
+			<li class="fragment grow">user defined (Web interface)</li>
+		</ul>
+		<li class="fragment grow">Web interface for the writer ?</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Thank you !</h3>
+	<img src="./images/better.jpg" width="300" />
+	<br/><br/>
+	<h1>Discussion</h1>
+</section>
+
+<section>
+	<h1>Resources</h1>
+	<a target="_blank" href="http://davidrapin.com/ina/lap_2013-02-28.zip">Download the LAP (linux 64-bit binary)</a><br/>
+	<a target="_blank" href="https://oss.sonatype.org/content/repositories/snapshots/fr/ina/dlweb/lap-writer-warc/1.0-SNAPSHOT/lap-writer-warc-1.0-SNAPSHOT-jar-with-dependencies.jar">Download the WARC Writer (runnable JAR)</a><br/>
+	<a target="_blank" href="https://oss.sonatype.org/content/repositories/snapshots/fr/ina/dlweb/lap-writer-generic/2.0-SNAPSHOT/lap-writer-generic-2.0-SNAPSHOT-jar-with-dependencies.jar">Download the LOG Writer (runnable JAR)</a><br/>
+	<a target="_blank" href="http://davidrapin.com/ina/LAP-UserGuide.pdf">Download the user-guide (PDF)</a><br/>
+	<a target="_blank" href="https://oss.sonatype.org/content/repositories/snapshots/fr/ina/dlweb/">Link to Ina's Maven repository</a><br/>
+	<hr/>
+	<h3>
+	Contact : david.rapin&#64;ina.fr
+	</h3>
+</section>
+
+
+
+<script src="./reveal/lib/js/head.min.js"></script>
+<script src="./reveal/js/reveal.min.js"></script>
+<script>
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+		transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/none
+
+		// Optional libraries used to extend on reveal.js
+		dependencies: [
+//			{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+//			{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+//			{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+//			{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+//			{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+//			{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+		]
+	});
+</script>
+
+</body>
+</html>

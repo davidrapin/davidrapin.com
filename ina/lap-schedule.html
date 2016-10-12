@@ -1,0 +1,106 @@
+<html>
+<head>
+	<title>LAP</title>
+	<style type="text/css">
+	h3 {
+		font-size:95%;
+	}
+	h2 {
+		border-bottom:2px solid #ddd;
+	}
+	body {
+		font-family:sans-serif;
+	}
+	code, pre {
+		font-weight:bold;
+	}
+	li, p {
+		color:#333;
+	}
+	</style>
+</head>
+<body>
+	<h1>Live Archiving Proxy</h1>
+
+	<h2>Current state</h2>
+	
+	<h3>DONE</h3>
+	<ul>
+		<li>[INA] Specify the system architecture (5 man-days);</li>
+		<li>[INA] Generify the storage module and develop a language-agnostic storage API (10 man-days);</li>
+		<li>[INA] Develop a generic storage plugin in Java (10 man-days);</li>
+		<li>[INA] Develop a basic ARC storage plugin in Java (5 man-days);</li>
+		<li>[INA] Modify the internal HTTP client to enable content streaming (5 man-days);</li>
+		<li>[INA] Package the software for distribution and deployment (10 man-days);</li>
+		<li>[INA] Enable buffering response data to disk to limit excessive memory usage (10 man-days);</li>
+		<li>[INA] A live monitoring and statistics system with a Web interface (10 man-days);</li>
+		<li>[INA] Streamline and generify the configuration system via a Web interface (10 man-days);</li>
+		<li>[Netarchive] Develop and package the WARC writer-plugin</li>
+	</ul>
+	
+	<h3>TODO: Share the WARC writer and LAP with partners for feedback (2013-03-01)</h3>
+	
+	<h3>TODO: Compile test feedbacks (2013-04-01)</h3>
+	
+	<h3>TODO: Final release (2013-05-01)</h3>
+	<ul>
+		<li>[INA] Write a user guide (5 man-days);</li>
+		<li>[INA] Implement feature and change requests from partners in the LAP (15 man-days);</li>
+		<li>[Netarchive] Implement feature and change requests from partners in the WARC writer-plugin (15 man-days);</li>
+	</ul>
+	
+	
+	<h2>Binary resources</h2>
+	<p>
+	<a href="./lap_2013-01-18.zip">Last build of the LAP binary</a> (Linux 64 only)<br/>
+	Usage <code>&gt;lap --web-port <em>LAP_WEB_PORT</em> --writer-port <em>LAP_WRITER_PORT</em></code>
+	</p>
+	
+	<p>
+	<a href="https://oss.sonatype.org/content/repositories/snapshots/fr/ina/dlweb/lap-writer-warc/1.0-SNAPSHOT/lap-writer-warc-1.0-SNAPSHOT-jar-with-dependencies.jar">
+	Last build of the WARC writer</a> (runnable JAR)<br />
+	Usage <code>&gt;java -jar lap-writer-warc-1.0-SNAPSHOT-jar-with-dependencies.jar <em>LAP_HOST</em>:<em>LAP_WRITER_PORT</em> --verbose --dir=<em>WARC_DIRECTORY</em></code>
+	</p>
+	
+	<p>
+	<a href="https://oss.sonatype.org/content/repositories/snapshots/fr/ina/dlweb/lap-writer-generic/2.0-SNAPSHOT/lap-writer-generic-2.0-SNAPSHOT-jar-with-dependencies.jar">
+	Last build of the demo LOG writer</a> (runnable JAR)<br />
+	This writer will only print captured resources URLs but not archive anything to disk.<br/>
+	Usage <code>&gt;java -jar lap-writer-generic-2.0-SNAPSHOT-jar-with-dependencies.jar <em>LAP_WRITER_PORT</em> <em>LAP_HOST</em></code>
+	</p>
+	
+	<h2>Developper resources</h2>
+	<p><a href="https://oss.sonatype.org/content/repositories/snapshots/fr/ina/dlweb/" target="_blank">INA's Maven repository.</a></p>
+	
+	<p>
+		Direct links to Java Generic LAP Writer library via maven : 
+		<a href="https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=fr.ina.dlweb&a=lap-writer-generic&v=2.0-SNAPSHOT&e=jar">compiled</a>,
+		<a href="https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=fr.ina.dlweb&a=lap-writer-generic&v=2.0-SNAPSHOT&e=jar&c=sources">sources</a>,
+		<a href="https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=fr.ina.dlweb&a=lap-writer-generic&v=2.0-SNAPSHOT&e=jar&c=javadoc">javadoc</a>.
+	</p>
+	
+	<p>The class to extend is <code>fr.ina.dlweb.lap.writer.DefaultLapWriter</code>.</p>
+	
+	<p>If you use Maven to manage dependencies, add this repository to your pom.xml.</p>
+	<pre>
+	&lt;repository&gt;
+		&lt;id&gt;sonatype-nexus-snapshots&lt;/id&gt;
+		&lt;url&gt;https://oss.sonatype.org/content/repositories/snapshots&lt;/url&gt;
+	&lt;/repository&gt;
+	</pre>
+	
+	<p>Then, add this dependency to your pom.xml.</p>
+	<pre>
+	&lt;dependency&gt;
+		&lt;groupId&gt;fr.ina.dlweb&lt;/groupId&gt;
+		&lt;artifactId&gt;lap-writer-generic&lt;/artifactId&gt;
+		&lt;version&gt;2.0-SNAPSHOT&lt;/version&gt;
+	&lt;/dependency&gt;
+	</pre>
+	
+	<h2>Interface preview</h2>
+	<iframe src="http://player.vimeo.com/video/58103718" width="750" height="842" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+	<!--img src="./lap-interface-small.png" /><br/-->
+	<!--iframe src="http://player.vimeo.com/video/58100294" width="750" height="456" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe-->
+</body>
+</html>

@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /google1671b90e45b2c9c8.html
+Disallow: /portfolio/highslide/
+Disallow: /ina/
+Allow: /
+Sitemap: http://davidrapin.com/sitemaps.xml

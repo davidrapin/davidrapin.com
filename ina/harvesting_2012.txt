@@ -1,0 +1,35 @@
+... how much you've harvested for 2012
+-N sites
+-N URL versions
+-N different contents
+-N To of content
+-N To deduplicated
+-N Go of video
+-N Go of audio
+-N Go of images
+-N Go of other
+
+... how it has been harvested (Heritrix, Netarchive Suite etc.)
+-PhagoSite
+-Crocket (Firefox + LAP)
+-UGC_Downloader
+-manual live archiving (curator + LAP)
+-next: Fantomas + LAP
+
+... the extent of curation and Q/A
+-curation : one full time documentalist
+-we use websites "files" to store metadata about websites
+ . first archiving
+ . group (frequency + depth)
+ . corpus
+-continuous addition of sites
+-automatic detection of dead sites
+-proprioception
+ . monthly indicators generation with per-site statistics
+
+... biggest challenge facing your harvesting efforts!
+ . moving everything to LAP
+ .
+
+
+... anything exciting/disturbing/interesting or otherwise relevant to harvesting that is going on (or will be going on soon) at your institution. 

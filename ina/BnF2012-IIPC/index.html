@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Web archiving at INA</title>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<link rel="stylesheet" href="./reveal/css/reveal.css">
+	<link rel="stylesheet" href="./reveal/css/theme/default.css" id="theme">
+	<!-- If the query includes 'pdf', use the PDF print sheet -->
+	<script>
+		document.write( '<link rel="stylesheet" href="./reveal/css/print/' + ( window.location.search.match( /pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+	</script>
+</head>
+
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section>
+	<span style="font-size:18px; position: absolute; display:block; left:0; top:0;">David RAPIN, 2012-11-30</span>
+	<br/><br/><br/>
+	<h1>Web archiving <br/>
+	at <img src="./images/logo-ina.png" width="180" style="margin:0 0 0 20px; position:relative; top:40px;" />
+	</h1>
+	
+</section>
+
+<section>
+	<br/><br/><br/><br/>
+	<h2>(1/3) Overview</h2>
+</section>
+
+<section>
+	<br/><br/><br/>
+	<h3>Continuous crawls</h3>
+	<br/>
+	<h4>(Crawling never stopped since 2009)</h4>
+</section>
+
+<section>
+	<br/><br/><br/>
+	<h3>10 000 websites</h3>
+	<br/>
+	<h4>(Crawled at different depths and frequencies)</h4>
+</section>
+
+<section>
+	<br/><br/><br/>
+	<h3>
+	16 million resources<br/>
+	collected daily
+	</h3>
+	<br/>
+	<h4>(pages: 25%, images: 60%, other: 15%)</h4>
+</section>
+
+<section>
+	<br/><br/><br/>
+	<h3>
+	1.6 TB of data<br/>
+	crawled daily
+	</h3>
+	<br/>
+	<h4>(Before deduplication)</h4>
+</section>
+
+<section>
+	<br/><br/><br/>
+	<h4>in addition</h4>
+	<h3>65+ GB of audio/video<br/>
+	crawled daily
+	</h3>
+	<br/>
+	<h4>By embedded-media extractors</h4>
+	<h4>(Youtube, Dailymotion, Vimeo, Soundcloud, etc.)</h4>
+</section>
+
+<section>
+	<br/><br/><br/><br/>
+	<h2>(2/3) Storage</h2>
+</section>
+
+<section>
+	<br/><br/><br/>
+	<h3>
+	Digital Archive File Format
+	</h3>
+	<br/>
+	<h4>(Simple, built-in integrity check)</h4>
+</section>
+
+<section>
+	<br/><br/><br/>
+	<h3>Content deduplication methodology</h3>
+	<br/>
+	<ul>
+		<li>Data and metadata stored separately</li>
+		<li>Data indexed by content signature (SHA256)</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Deduplication results</h3>
+	<img src="./images/arc-daff-size-ratio.png" style="width:90%; margin:0;" />
+	<br/>
+	<ul>
+		<li>Observed compression factor: <b>10</b></li>
+		<li>Depends on crawl frequencies</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Deduplication effects on compression</h3>
+	<img src="./images/daff-compression.png" style="width:90%; margin:0;" />
+	<ul>
+		<li>Higher HTML files proportion</li>
+		<li>Better compression factor (<b>70%</b>)</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Storage needs evolution</h3>
+	<img src="./images/storage-needs.png" style="width:90%; margin:0;" />
+</section>
+	
+<section>
+	<br/><br/><br/><br/>
+	<h2>(3/3) Crawling modern websites</h2>
+</section>
+
+<section>
+	<br/><br/><br/><br/>
+	<h3>
+	Multiple crawlers<br/>
+	for different needs
+	</h3>
+</section>
+
+<section>
+	<br/><br/><br/><br/>
+	<h3>
+	PhagoSite<br/>
+	</h3>
+	<br/>
+	<ul>
+		<li>Historical crawler</li>
+		<li>Fast, basic JavaScript link extraction</li>
+	</ul>
+</section>
+
+<section>
+	<br/><br/><br/><br/>
+	<h3>
+	Crocket<br/>
+	</h3>
+	<br/>
+	<ul>
+		<li>Firefox based</li>
+		<li>Very slow, fully JavaScript enabled</li>
+	</ul>
+</section>
+
+<section>
+	<br/><br/><br/><br/>
+	<h3>
+	Fantomas<br/>
+	</h3>
+	<br/>
+	<ul>
+		<li>PhantomJS based</li>
+		<li>Slow, fully JavaScript enabled</li>
+	</ul>
+</section>
+
+<section>
+	<br/><br/><br/><br/>
+	<h3>
+	An infrastructure for <br/>
+	multi-crawler archiving
+	</h3>
+</section>
+
+<section>
+	<h3>
+	Live Archiving Proxy
+	</h3>
+	<img src="./images/lap.png" style="width:90%; margin:0; " />
+</section>
+
+<section>
+	<br/><br/><br/><br/>
+	<h3>
+	Live Archiving Proxy
+	</h3>
+	<br/>
+	<ul>
+		<li>One storage backend</li>
+		<li>Plug-and-play 'writer' plugins</li>
+		<li>No storage on crawl servers</li>
+		<li>Multiple writers provide fault tolerance</li>
+	</ul>
+</section>
+
+<section>
+	<br/><br/><br/><br/>
+	<h3>
+	Live Archiving Proxy
+	</h3>
+	<br/>
+	<h4>Available April, 2013</h4>
+</section>
+
+<section>
+	<br/><br/><br/>
+	<h2>
+	Thank you !
+	</h2>
+	<img src="./images/better.jpg" width="300" />
+</section>
+
+
+
+<script src="./reveal/lib/js/head.min.js"></script>
+<script src="./reveal/js/reveal.min.js"></script>
+<script>
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+		transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/none
+
+		// Optional libraries used to extend on reveal.js
+		dependencies: [
+//			{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+//			{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+//			{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+//			{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+//			{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+//			{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+		]
+	});
+</script>
+
+</body>
+</html>
